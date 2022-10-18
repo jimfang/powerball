@@ -89,7 +89,7 @@ foreach ($DrawSequence in 1..7) {
 
     $DrawWin = $DrawStats[0].Name
     $WinningNumbers += $DrawWin
-    Write-Host "$DrawSequence draw: $WinningNumbers "
+    Write-Host "$DrawSequence draw: $WinningNumbers"
     
     $WinNumberPoolNew = $WinNumberPoolNew | Where-Object {$_.WinNumber -ne $DrawWin}
     # $WinNumberPoolNew | Format-Table
