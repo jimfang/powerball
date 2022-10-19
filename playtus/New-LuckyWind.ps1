@@ -18,10 +18,11 @@ Write-Host "Target on $WeekDay Draw"
 Write-Host "`n`n=============="
 
 # Config
-$DrawTimeUnit = 314
+$DrawTimeUnit = 3141#5926
 
 # History Date
-$Last10PowerBall = @(2, 10, 4, 8, 15)
+# $Last10PowerBall = @(2, 10, 4, 8, 15)
+$Last10PowerBall = @(2, 10, 4, 8)
 
 # Final Result
 $WinningNumbers = @()
@@ -99,3 +100,10 @@ foreach ($DrawSequence in 1..7) {
 
 Write-Host "===============`n`n"
 Write-Warning "Final Draw Result: $WinningNumbers | $PowerballWonNumber `n"
+
+$EndTime = Get-Date
+Write-Host $EndTime
+$Diff = New-TimeSpan -Start $CurrentTime -End $EndTime
+$DurationInSec = $Diff.TotalSeconds
+$DurationDisplay = Convert-TimeFormat -Seconds $DurationInSec
+Write-Host "Total duration: $DurationDisplay"

@@ -20,3 +20,28 @@ function Get-WeekMarkDay {
     $WeekMarkDay = $WeekMarkTime.ToString("MM/dd/yyyy")
     return $WeekMarkDay
 }
+
+
+function Convert-TimeFormat {
+    param (
+        [ValidateNotNullOrEmpty()]
+        [Parameter(Mandatory = $true)]
+        $Seconds
+    )
+
+    $TimeSpan = New-TimeSpan -Seconds $Seconds
+
+    $Hours = $TimeSpan.Hours
+    if ($TimeSpan.Days -gt 0) {
+        $Hours += 24 * $TimeSpan.Days
+    }
+
+    $Minutes = $TimeSpan.Minutes
+    $Sec = $TimeSpan.Seconds
+
+    $NewFormat = "{0:d2}" -f $Hours
+    $NewFormat += ":{0:d2}" -f $Minutes
+    $NewFormat += ":{0:d2}" -f $Sec
+
+    return $NewFormat
+}
