@@ -22,7 +22,7 @@ $DrawTimeUnit = 3141#5926
 
 # History Date
 # $Last10PowerBall = @(2, 10, 4, 8, 15)
-$Last10PowerBall = @(2, 10, 4, 8)
+$Last10PowerBall = @(18, 2, 10, 4, 8)
 
 # Final Result
 $WinningNumbers = @()
