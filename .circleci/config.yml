@@ -26,8 +26,7 @@ jobs:
           shell: powershell.exe
           command: |
             $pwd
-            dir
-            pwsh -ExecutionPolicy Bypass -File New-LuckyWind.ps1
+            .\New-LuckyWind.ps1
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows

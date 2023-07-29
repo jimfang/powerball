@@ -22,7 +22,7 @@ $DrawTimeUnit = 3141#5926
 
 # History Date
 # $Last10PowerBall = @(2, 10, 4, 8, 15)
-$Last10PowerBall = @(18, 2, 10, 4, 8)
+$Last10PowerBall = @(18, 17, 15, 20)
 
 # Final Result
 $WinningNumbers = @()
@@ -63,8 +63,9 @@ $PowerballWin = $DrawStats[0].Name
 $PowerballWonNumber += $PowerballWin
 
 
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 # Draw winning number
-foreach ( $WinNumber in 1..35 ) {
+foreach ( $WinNumber in 1..22 ) {
     if($PowerballWonNumber -contains $WinNumber) {
         continue
     }
@@ -75,7 +76,7 @@ foreach ( $WinNumber in 1..35 ) {
 
 $WinNumberPoolNew = $WinNumberPool
 
-foreach ($DrawSequence in 1..7) {
+foreach ($DrawSequence in 1..6) {
     $MinDrawTimes = (7-$DrawSequence) * $DrawTimeUnit
     $MaxDrawTimes = (8-$DrawSequence) * $DrawTimeUnit
     $DrawTimes = Get-Random -Minimum $MinDrawTimes -Maximum $MaxDrawTimes
@@ -96,6 +97,38 @@ foreach ($DrawSequence in 1..7) {
     # $WinNumberPoolNew | Format-Table
 }
 
+# ------------------------------------
+foreach ( $WinNumber in 23..35 ) {
+    if($PowerballWonNumber -contains $WinNumber) {
+        continue
+    }
+
+    $WinNumberPool += New-Object -TypeName PSCustomObject -Property @{"WinNumber" = $WinNumber; "Position" = 0 } 
+}
+# $WinNumberPool | Format-Table
+
+$WinNumberPoolNew = $WinNumberPool
+
+foreach ($DrawSequence in 1) {
+    $MinDrawTimes = (7-$DrawSequence) * $DrawTimeUnit
+    $MaxDrawTimes = (8-$DrawSequence) * $DrawTimeUnit
+    $DrawTimes = Get-Random -Minimum $MinDrawTimes -Maximum $MaxDrawTimes
+    
+    $NumberPoolForDraw = $WinNumberPoolNew.WinNumber
+    # Write-Host "$DrawSequence draw: numbers in pool: $NumberPoolForDraw"
+    $DrawStats = 1..$DrawTimes | ForEach-Object {
+        $NumberPoolForDraw | Get-Random
+    } | Group-Object | Select-Object Name,Count | Sort-Object -Property Count -Descending
+    
+    # $DrawStats | Format-Table
+
+    $DrawWin = $DrawStats[0].Name
+    $WinningNumbers += $DrawWin
+    Write-Host "$DrawSequence draw: $WinningNumbers"
+    
+    $WinNumberPoolNew = $WinNumberPoolNew | Where-Object {$_.WinNumber -ne $DrawWin}
+    # $WinNumberPoolNew | Format-Table
+}
 
 
 Write-Host "===============`n`n"
