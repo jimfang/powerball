@@ -25,8 +25,8 @@ jobs:
           name: Run and Output
           shell: powershell.exe
           command: |
-            cd playtus
             $pwd
+            dir
             pwsh -ExecutionPolicy Bypass -File New-LuckyWind.ps1
 
 # Invoke jobs via workflows
