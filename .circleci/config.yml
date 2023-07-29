@@ -2,16 +2,17 @@
 # See: https://circleci.com/docs/configuration-reference
 version: 2.1
 
+orbs:
+  win: circleci/windows@5.0
+
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/configuration-reference/#jobs
 jobs:
   # Below is the definition of your job to build and test your app, you can rename and customize it as you want.
   build-and-test:
-    # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
-    # See: https://circleci.com/docs/configuration-reference/#docker-machine-macos-windows-executor
-    # Be sure to update the tag on this image to a more stable version, using latest can result in unstable builds.
-    docker:
-      - image: microsoft/dotnet:latest
+    executor:
+      name: win/default
+      shell: powershell.exe
     # Add steps to the job
     # See: https://circleci.com/docs/configuration-reference/#steps
     steps:
@@ -22,8 +23,10 @@ jobs:
           # Update this line with the directory that contains your tests project file
           working_directory: ~/playtus
           name: Run and Output
+          shell: powershell.exe
+
           command: |
-            PowerShell.exe -ExecutionPolicy Bypass -File New-LuckyWind.ps1
+            pwsh -ExecutionPolicy Bypass -File New-LuckyWind.ps1
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
