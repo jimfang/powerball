@@ -76,7 +76,7 @@ foreach ( $WinNumber in 1..22 ) {
 
 $WinNumberPoolNew = $WinNumberPool
 
-foreach ($DrawSequence in 1..6) {
+foreach ($DrawSequence in 1..5) {
     $MinDrawTimes = (7-$DrawSequence) * $DrawTimeUnit
     $MaxDrawTimes = (8-$DrawSequence) * $DrawTimeUnit
     $DrawTimes = Get-Random -Minimum $MinDrawTimes -Maximum $MaxDrawTimes
@@ -97,7 +97,9 @@ foreach ($DrawSequence in 1..6) {
     # $WinNumberPoolNew | Format-Table
 }
 
-# ------------------------------------
+# ---------------Reset and Reload---------------------
+$WinNumberPool = @()
+
 foreach ( $WinNumber in 23..35 ) {
     if($PowerballWonNumber -contains $WinNumber) {
         continue
@@ -109,7 +111,7 @@ foreach ( $WinNumber in 23..35 ) {
 
 $WinNumberPoolNew = $WinNumberPool
 
-foreach ($DrawSequence in 1) {
+foreach ($DrawSequence in 1..2) {
     $MinDrawTimes = (7-$DrawSequence) * $DrawTimeUnit
     $MaxDrawTimes = (8-$DrawSequence) * $DrawTimeUnit
     $DrawTimes = Get-Random -Minimum $MinDrawTimes -Maximum $MaxDrawTimes
